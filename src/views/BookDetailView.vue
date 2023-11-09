@@ -2,6 +2,7 @@
   <div v-if="booksStore.book" class="container">
     <h2>
       {{ booksStore.book.title }} (<router-link
+        v-if="isbn"
         :to="{ name: 'BookEditView', params: { isbn: isbn } }"
         >Edit</router-link
       >)

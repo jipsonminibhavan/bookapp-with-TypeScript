@@ -68,7 +68,11 @@ export default defineComponent({
 
   data(): ComponentData {
     return {
-      book: {},
+      book: {
+        title: '',
+        abstract: '',
+        author: ''
+      },
       isbn: '',
       errors: {
         title: '',
@@ -144,6 +148,7 @@ export default defineComponent({
     }
   }*/
   created() {
+    console.log('ISBN:', this.$route.params.isbn)
     //const bookStore = useBookStore()
     //bookStore.getBook(this.$route.params.isbn)
     this.booksStore.getBook(this.$route.params.isbn as string)
