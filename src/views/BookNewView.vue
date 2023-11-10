@@ -103,33 +103,6 @@ export default defineComponent({
     }
   },
   methods: {
-    /*async createBook() {
-      let errorText = ''
-      console.log(this.book)
-      try {
-        const response = await fetch('http://localhost:4730/books', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(this.book)
-        })
-
-        if (!response.ok) {
-          errorText = await response.text()
-          throw new Error('Network response was not ok')
-        }
-
-        this.success = true
-        this.resetForm()
-      } catch (error) {
-        console.error(error)
-        if (errorText) {
-          console.error(errorText)
-        }
-        this.success = false
-      }
-    },*/
     ...mapActions(useBookStore, ['createBook']),
 
     async submit() {

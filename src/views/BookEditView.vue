@@ -89,17 +89,6 @@ export default defineComponent({
     }
   },
   methods: {
-    /* async getBook(isbn: string) {
-      try {
-        const response = await fetch(`http://localhost:4730/books/${isbn}`)
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-        this.book = await response.json()
-      } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error)
-      }
-    },*/
     async submit() {
       console.log(JSON.stringify(this.book))
       try {
@@ -141,16 +130,8 @@ export default defineComponent({
       }
     }
   },
-  /* async created() {
-    this.isbn = this.$route.params.isbn as string
-    if (this.isbn) {
-      await this.getBook(this.isbn)
-    }
-  }*/
   created() {
     console.log('ISBN:', this.$route.params.isbn)
-    //const bookStore = useBookStore()
-    //bookStore.getBook(this.$route.params.isbn)
     this.booksStore.getBook(this.$route.params.isbn as string)
   }
 })

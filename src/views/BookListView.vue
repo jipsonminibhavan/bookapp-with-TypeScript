@@ -97,45 +97,9 @@ export default defineComponent({
     toggleReadStatus(book: Book) {
       this.booksStore.toggleReadStatus(book)
     },
-    /* toggleReadStatus(bookToUpdate: Book) {
-      const bookIndex = this.booksStore.books.findIndex((book) => book.id === bookToUpdate.id)
-      if (bookIndex !== -1) {
-        this.books[bookIndex] = {
-          ...this.booksStore.books[bookIndex],
-          read: !this.booksStore.books[bookIndex].read
-        }
-      }
-    },*/
     deleteBook(bookId: number) {
       this.booksStore.deleteBook(bookId)
     },
-    /* async updateBooks() {
-      try {
-        const response = await fetch('http://localhost:4730/books')
-        console.log('Response:', response)
-        const books = await response.json()
-        console.log(books)
-        this.books = books
-      } catch (err) {
-        console.error('Failed to update books:', err)
-      }
-    },*/
-    /*async deleteBook(bookId: number) {
-      if (confirm('Are you sure you want to delete this book?'))
-        try {
-          const response = await fetch(`http://localhost:4730/books/${bookId}`, {
-            method: 'DELETE'
-          })
-
-          if (!response.ok) {
-            throw new Error('Network response was not ok')
-          }
-
-          this.books = this.books.filter((book) => book.id !== bookId)
-        } catch (error) {
-          console.error('There has been a problem with your fetch operation:', error)
-        }
-    },*/
     nextPage() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++
