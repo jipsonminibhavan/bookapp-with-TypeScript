@@ -71,7 +71,6 @@ interface Errors {
 
 interface ComponentData {
   book: Partial<Book>
-  //success: boolean
   errors: {
     [P in keyof Partial<Book>]: string
   }

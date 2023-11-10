@@ -21,5 +21,26 @@ export const useAuthStore = defineStore('AuthStore', {
       return !!this.email
     }
   },
-  actions: {}
+  actions: {
+    async login(user: { email: string; password: string }) {
+      try {
+        const response = await fetch('http://localhost:4730/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(user)
+        })
+        if (!response.ok) {
+          throw new Error('Login failed')
+        }
+        const data: LoginResponse = await response.json()
+        this.user = data.user
+        this.accessToken = data.accessToken
+      } catch (error) {
+        console.error('Login failed:', error)
+        throw error
+      }
+    }
+  }
 })

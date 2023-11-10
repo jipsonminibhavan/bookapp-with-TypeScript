@@ -6,6 +6,7 @@ const BookListView = () => import('@/views/BookListView.vue')
 const BookEditView = () => import('@/views/BookEditView.vue')
 const BookNewView = () => import('@/views/BookNewView.vue')
 const TheLoginView = () => import('@/views/TheLoginView.vue')
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
