@@ -23,18 +23,22 @@ export const useAuthStore = defineStore('AuthStore', {
   },
   actions: {
     async login(user: { email: string; password: string }) {
+      const requestBody = JSON.stringify(user)
+      console.log(requestBody)
+
       try {
         const response = await fetch('http://localhost:4730/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(user)
+          body: requestBody
         })
         if (!response.ok) {
           throw new Error('Login failed')
         }
         const data: LoginResponse = await response.json()
+        console.log('Access Token:', data.accessToken)
         this.user = data.user
         this.accessToken = data.accessToken
       } catch (error) {

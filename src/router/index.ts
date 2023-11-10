@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { useAuthStore } from '@/stores/AuthStore'
 import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import BookDetailView from '@/views/BookDetailView.vue'
+import { mapStores } from 'pinia'
 const BookListView = () => import('@/views/BookListView.vue')
 const BookEditView = () => import('@/views/BookEditView.vue')
 const BookNewView = () => import('@/views/BookNewView.vue')
@@ -49,6 +51,17 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
-router.beforeEach(() => {})
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+
+  const publicPages = ['TheLoginView']
+  const authRequired = !publicPages.includes(to.name ?? '')
+
+  if (authRequired && !authStore.isAuthenticated) {
+    next({ name: 'TheLoginView' })
+  } else {
+    next()
+  }
+})
 
 export default router
