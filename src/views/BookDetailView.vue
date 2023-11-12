@@ -9,7 +9,7 @@
     </h2>
     <p>{{ booksStore.book.abstract }}</p>
     <img :src="booksStore.book.cover" />
-    <a class="button button-outline" href="/">Back</a>
+    <router-link class="button button-outline" to="/">Back</router-link>
   </div>
 </template>
 

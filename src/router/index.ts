@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import { useAuthStore } from '@/stores/AuthStore'
-import HomeView from '@/views/HomeView.vue'
+const HomeView = () => import('@/views/HomeView.vue')
 import AboutView from '@/views/AboutView.vue'
-import BookDetailView from '@/views/BookDetailView.vue'
-import { mapStores } from 'pinia'
+const BookDetailView = () => import('@/views/BookDetailView.vue')
 const BookListView = () => import('@/views/BookListView.vue')
 const BookEditView = () => import('@/views/BookEditView.vue')
 const BookNewView = () => import('@/views/BookNewView.vue')
@@ -12,56 +11,58 @@ const TheLoginView = () => import('@/views/TheLoginView.vue')
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
+    name: 'HomeView',
     component: HomeView
   },
   {
     path: '/books',
     name: 'Books',
-    component: BookListView
+    component: BookListView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/about',
     name: 'about',
-    component: AboutView
+    component: AboutView,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/books/:isbn',
     name: 'BookDetailView',
-    component: BookDetailView
+    component: BookDetailView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/books/:isbn/edit',
     name: 'BookEditView',
-    component: BookEditView
+    component: BookEditView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/books/create',
     name: 'BookNewView',
-    component: BookNewView
+    component: BookNewView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/login',
     name: 'TheLoginView',
-    component: TheLoginView
+    component: TheLoginView,
+    meta: { requiresAuth: false }
   }
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-
-  const publicPages = ['TheLoginView']
-  const authRequired = !publicPages.includes(to.name ?? '')
-
-  if (authRequired && !authStore.isAuthenticated) {
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next({ name: 'TheLoginView' })
-  } else {
-    next()
+  } else if (to.path === '/login' && authStore.isAuthenticated) {
+    next({ name: 'Books' })
   }
-})
+})*/
 
 export default router

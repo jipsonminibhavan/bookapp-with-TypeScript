@@ -17,11 +17,11 @@
         <label for="password">Password </label>
         <Field
           id="password"
-          name="email"
+          name="password"
           v-model="user.password"
           type="password"
           placeholder="Enter your password!"
-          rules="required"
+          rules="required|min:6"
         />
         <ErrorMessage name="password" />
       </fieldset>
@@ -53,8 +53,8 @@ export default defineComponent({
   data(): ComponentData {
     return {
       user: {
-        email: '',
-        password: ''
+        email: '', // 'admin@bookmonkey.api'
+        password: '' // 'password1!'
       },
       success: false,
       loginError: false
@@ -63,15 +63,21 @@ export default defineComponent({
   methods: {
     ...mapActions(useAuthStore, ['login']),
     async submit() {
+      console.log('User Input:', this.user)
       this.success = false
       this.loginError = false
       try {
         await this.login(this.user)
+        console.log('Login successful')
         this.success = true
       } catch (error) {
+        console.error('Login failed:', error)
         this.loginError = true
       }
     }
+  },
+  created() {
+    console.log('TheLoginView created')
   }
 })
 </script>

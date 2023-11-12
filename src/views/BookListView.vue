@@ -116,6 +116,7 @@ export default defineComponent({
   created() {
     console.log(this.booksStore)
     this.booksStore.fetchBooks()
+    console.log('BookListView created')
   }
 })
 </script>

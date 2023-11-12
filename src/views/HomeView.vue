@@ -1,17 +1,24 @@
 <template>
   <AppNavigation />
-  <BookListView />
+  <router-view v-if="isAuthenticated" />
+  <TheLoginView v-else />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AppNavigation from '../components/AppNavigation.vue'
-import BookListView from '../views/BookListView.vue'
+import AppNavigation from '@/components/AppNavigation.vue'
+import TheLoginView from '@/views/TheLoginView.vue'
+import { useAuthStore } from '@/stores/AuthStore'
+import { mapState } from 'pinia'
+
 export default defineComponent({
-  name: 'App',
+  name: 'HomeView',
   components: {
     AppNavigation,
-    BookListView
+    TheLoginView
+  },
+  computed: {
+    ...mapState(useAuthStore, ['isAuthenticated'])
   }
 })
 </script>

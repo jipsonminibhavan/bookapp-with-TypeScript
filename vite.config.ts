@@ -17,6 +17,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           books: [
+            '@/views/HomeView.vue',
             '@/views/BookListView.vue',
             '@/views/BookDetailView.vue',
             '@/views/BookEditView.vue'
