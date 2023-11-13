@@ -33,10 +33,10 @@ export default defineComponent({
       this.logout()
 
       this.$router.push({ name: 'TheLoginView' })
-    },
-    testClick() {
-      console.log('Link clicked')
     }
+    //testClick() {
+    // console.log('Link clicked')
+    //}
   },
   created() {
     console.log('AppNavigation created')

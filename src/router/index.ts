@@ -12,7 +12,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'HomeView',
-    component: HomeView
+    component: HomeView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/books',
@@ -56,13 +57,15 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    console.log('Not authenticated, redirecting to login...')
     next({ name: 'TheLoginView' })
-  } else if (to.path === '/login' && authStore.isAuthenticated) {
+  } else if (!to.meta.requiresAuth && authStore.isAuthenticated && to.name === 'TheLoginView') {
+    console.log('Routing to:', to.path, 'Authenticated:', authStore.isAuthenticated)
     next({ name: 'Books' })
   }
-})*/
+})
 
 export default router
