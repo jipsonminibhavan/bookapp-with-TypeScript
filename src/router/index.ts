@@ -57,15 +57,16 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
+
 router.beforeEach((to, from, next) => {
+  // alert('foobar')
+  console.log('start')
   const authStore = useAuthStore()
-  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    console.log('Not authenticated, redirecting to login...')
+  if (to.name !== 'TheLoginView' && !authStore.isAuthenticated) {
+    console.log('authenticated')
     next({ name: 'TheLoginView' })
-  } else if (!to.meta.requiresAuth && authStore.isAuthenticated && to.name === 'TheLoginView') {
-    console.log('Routing to:', to.path, 'Authenticated:', authStore.isAuthenticated)
-    next({ name: 'Books' })
+  } else {
+    next()
   }
 })
-
 export default router
