@@ -49,7 +49,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import BookListItem from '../components/BookListItem.vue'
-//import http from '@/utils/http'
 import type { Book } from '@/utils/model'
 import { useBookStore } from '@/stores/BookStore'
 import { mapStores } from 'pinia'
