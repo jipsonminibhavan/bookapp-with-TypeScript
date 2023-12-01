@@ -5,7 +5,7 @@ export type BookState = {
   books: Array<Book>
   newBook: Partial<Book>
   success?: boolean
-  book?: null
+  book?: Book | null
   isbn: string
 }
 
