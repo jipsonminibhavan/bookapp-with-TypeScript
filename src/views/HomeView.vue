@@ -1,5 +1,4 @@
 <template>
-  <AppNavigation />
   <router-view v-if="isAuthenticated" />
   <TheLoginView v-else />
 </template>
@@ -14,7 +13,6 @@ import { mapState } from 'pinia'
 export default defineComponent({
   name: 'HomeView',
   components: {
-    AppNavigation,
     TheLoginView
   },
   computed: {
