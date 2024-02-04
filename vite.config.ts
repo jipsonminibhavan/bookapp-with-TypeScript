@@ -10,8 +10,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  },
-  build: {
+  }
+  /* build: {
     rollupOptions: {
       // https://rollupjs.org/guide/en/#outputmanualchunks
       output: {
@@ -25,5 +25,5 @@ export default defineConfig({
         }
       }
     }
-  }
+  }*/
 })
